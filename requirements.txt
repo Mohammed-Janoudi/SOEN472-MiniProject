@@ -1,0 +1,8 @@
+# COMP 472 - Mini Project 1 dependencies
+# Install with:  pip install -r requirements.txt
+
+transformers
+sentence-transformers
+scikit-learn
+numpy
+pandas
