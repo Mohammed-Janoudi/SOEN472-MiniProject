@@ -1,4 +1,4 @@
-# SOEN472-MiniProject
+# COMP472-MiniProject
 
 Intelligent Support Assistant with Sentiment Analysis and Retrieval
 — COMP 472 (Artificial Intelligence), Summer 2026, Mini Project 1.
