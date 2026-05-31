@@ -1,8 +1,8 @@
 # Support assistant for COMP 472 mini project 1
 
-# import pandas as pd
-# from sentence_transformers import SentenceTransformer, util
-# from transformers import pipeline
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+from transformers import pipeline
 
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 SENTIMENT_MODEL_NAME = "sentiment-analysis"
@@ -20,12 +20,13 @@ class SupportAssistant:
         # TODO: load_knowledge_base(), load_models(), generate_embeddings()
 
     def load_knowledge_base(self):
-        # read the csv with pandas and split it into questions / answers
-        raise NotImplementedError
+        df = pd.read_csv(self.knowledge_base_path)
+        self.questions = df["question"].tolist()
+        self.answers = df["answer"].tolist()
 
     def load_models(self):
-        # SentenceTransformer for embeddings + sentiment pipeline
-        raise NotImplementedError
+        self.embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
+        self.sentiment_pipeline = pipeline(SENTIMENT_MODEL_NAME)
 
     def generate_embeddings(self):
         # encode all the questions once and keep them around
