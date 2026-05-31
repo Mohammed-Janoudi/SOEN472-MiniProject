@@ -2,6 +2,7 @@
 
 import pandas as pd
 from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
 from transformers import pipeline
 
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
@@ -29,12 +30,13 @@ class SupportAssistant:
         self.sentiment_pipeline = pipeline(SENTIMENT_MODEL_NAME)
 
     def generate_embeddings(self):
-        # encode all the questions once and keep them around
-        raise NotImplementedError
+        self.question_embeddings = self.embedding_model.encode(self.questions)
 
     def semantic_search(self, query):
-        # embed the query, find the closest stored question, return its answer
-        raise NotImplementedError
+        query_embedding = self.embedding_model.encode(query)
+        similarities = cosine_similarity([query_embedding], self.question_embeddings)[0]
+        best_match = similarities.argmax()
+        return self.answers[best_match]
 
     def analyze_sentiment(self, text):
         # run the pipeline and return the label + score
